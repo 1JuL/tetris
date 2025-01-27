@@ -1,4 +1,4 @@
-import pygame,sys
+import pygame, sys, time
 from game import Game
 from colors import Colors
 
@@ -33,6 +33,9 @@ pygame.time.set_timer(GAME_UPDATE, GAME_TIMER)
 
 next_score_target = 1000
 
+key_hold_start = None
+hold_duration = 1
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -48,6 +51,9 @@ while True:
                 pygame.quit()
                 sys.exit()
                 
+            if event.key == pygame.K_r and game.game_over == False:
+                key_hold_start = time.time()
+                
             if event.key == pygame.K_p and game.game_over == False:
                 game.pause_game()
             if event.key == pygame.K_LEFT and game.game_over == False:
@@ -59,9 +65,20 @@ while True:
                 game.update_score(0, 1)
             if event.key == pygame.K_UP and game.game_over == False:
                 game.rotate()
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_r:
+                key_hold_start = None 
                 
         if event.type == GAME_UPDATE and game.game_over == False:
             game.move_down()
+            
+        # Check if R key is being held
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_r] and key_hold_start is not None:
+            elapsed_time = time.time() - key_hold_start
+            if elapsed_time >= hold_duration and not game.game_over:
+                game.reset()
+                key_hold_start = None
         
     #Difficulty increase    
     if game.score >= next_score_target:
