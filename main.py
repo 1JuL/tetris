@@ -14,7 +14,7 @@ rotate_control_surface = controls_font.render("Up Arrow to Rotate",True,Colors.w
 pause_control_surface = controls_font.render("P to Pause, U to Unpause",True,Colors.white)
 menu_controls_surface = controls_font.render("ESC to Exit Game",True,Colors.white)
 
-game_over_surface = title_font.render("GAME OVER", True, Colors.white)
+game_over_surface = title_font.render("GAME OVER", True, Colors.yellow)
 game_over_msg_surface = msg_font.render("Press 'R' to restart!!", True, Colors.yellow)
 
 score_rect = pygame.Rect(325, 55, 170, 60)
@@ -90,7 +90,7 @@ while True:
     #Drawing
     score_value_surface = title_font.render(str(game.score), True, Colors.white)
     
-    screen.fill(Colors.dark_blue)
+    screen.fill(Colors.dark_purple)
     screen.blit(score_surface, (365, 20, 50, 50))
     screen.blit(next_surface, (375, 180, 50, 50))
     screen.blit(move_control_surface, (320, 420, 50, 50))
