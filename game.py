@@ -1,5 +1,6 @@
 import random
 import pygame
+import sys
 from grid import Grid
 from blocks import *
 
@@ -14,6 +15,7 @@ class Game:
         self.rotate_sound = pygame.mixer.Sound("sounds/rotate.ogg")
         self.clear_sound = pygame.mixer.Sound("sounds/clear.ogg")
         self.game_over_sound = pygame.mixer.Sound("sounds/game_over.ogg")
+        self.pause_sound = pygame.mixer.Sound("sounds/pause.ogg")
         pygame.mixer.music.load("sounds/blossom_bossa_fabien_cambi.ogg")
         pygame.mixer.music.play(-1)
         
@@ -94,6 +96,24 @@ class Game:
             if self.grid.is_inside(tile.row, tile.column) == False:
                 return False
         return True
+    
+    def pause_game(self):
+        is_paused = True
+        self.pause_sound.play()
+        while is_paused:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_u:
+                        is_paused = False
+                        self.pause_sound.play()
+                    if event.key == pygame.K_ESCAPE:
+                        is_paused = False
+                        pygame.quit()
+                        sys.exit()
+                if event.type == pygame.QUIT:
+                    is_paused = False
+                    pygame.quit()
+                    sys.exit()
         
     def draw(self, screen):
         self.grid.draw(screen)
