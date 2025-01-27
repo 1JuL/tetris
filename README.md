@@ -1,7 +1,8 @@
 # Tetris
 
 ### Installation
-You need to run **`pip install pygame-ce`** to install the required library for the game. Alternatively, you can download the ZIP file, which contains the executable version of the game.
+- You need to run **`pip install pygame-ce`** to install the required library for the game. 
+- Alternatively, you can download the ZIP file, which contains the executable version of the game.
 
 ### How to Play
 - Use the arrow keys (⬅️⬇️➡️) to move the blocks.
