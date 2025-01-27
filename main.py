@@ -66,7 +66,7 @@ while True:
     #Difficulty increase    
     if game.score >= next_score_target:
         GAME_TIMER = max(50, GAME_TIMER - 20)
-        print(GAME_TIMER)
+        #print(GAME_TIMER)
         pygame.time.set_timer(GAME_UPDATE, GAME_TIMER)
         next_score_target += 1000
         
